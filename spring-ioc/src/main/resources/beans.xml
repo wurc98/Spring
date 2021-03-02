@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="User" class="com.wurc.pojo.User">
+        <property name="name" value="Spring" />
+    </bean>
+
+<!--
+   id是bean的唯一标识
+   class : bean对象的全限定名
+   name : 别名，  权限比id高。可以多个别名， 空格，逗号分隔
+-->
+    <bean id="UserT" class="com.wurc.pojo.UserT" name="a,b,c d">
+        <property name="name" value="wurc" />
+    </bean>
+<!--    import 可以导入其他bean文件，合并为一个-->
+</beans>
