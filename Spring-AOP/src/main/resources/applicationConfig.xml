@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd">
+    <bean id="userService" class="com.wurc.serivce.UserServiceImp"></bean>
+    <bean id="log" class="com.wurc.log.Log"></bean>
+    <bean id="afterLog" class="com.wurc.log.AfterLog"></bean>
+    <bean id="diy" class="com.wurc.diy.Diy"/>
+
+
+    <!--    配置AOP-->
+    <aop:config>
+<!--        第一种方式，spring定义切面-->
+<!--        切入点-->
+<!--        切入点：expression表达式，execution(要执行的位置)-->
+        <aop:pointcut id="pointcut" expression="execution(* com.wurc.serivce.UserServiceImp.*(..))"/>
+<!--        执行环绕增加-->
+        <aop:advisor advice-ref="log" pointcut-ref="pointcut"/>
+
+<!--        第二种方式，自定义切面-->
+<!--&lt;!&ndash;        自定义切面&ndash;&gt;-->
+<!--        <aop:aspect ref="diy">-->
+<!--            <aop:pointcut id="point" expression="execution(* com.wurc.serivce.UserServiceImp.*(..))"/>-->
+<!--            <aop:after method="after" pointcut-ref="point"/>-->
+<!--            <aop:before method="before" pointcut-ref="point"/>-->
+<!--        </aop:aspect>-->
+<!--        第三种方式，注解定义切面-->
+    </aop:config>
+    <bean id="annotationDiy" class="com.wurc.diy.AnnotationDiy" />
+    <aop:aspectj-autoproxy/>
+</beans>
